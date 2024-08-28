@@ -1,0 +1,21 @@
+class Solution:
+    def isValid(self, s: str) -> bool:
+        if len(s)%2==1:
+            return False
+        my_stack = []
+        opens = {'(': ')', '{': '}', '[': ']'}
+        parens = {'(': ')', '{': '}', '[': ']', ')': '(', '}': '{', ']': '['}
+        for i in s:
+            if len(my_stack) == 0:
+                if i not in opens:
+                    return False
+            if i in opens:
+                my_stack.insert(0,i)
+            else:
+                if my_stack[0]==parens[i]:
+                    my_stack.pop(0)
+                else:
+                    return False
+        if len(my_stack) != 0:
+            return False
+        return True
